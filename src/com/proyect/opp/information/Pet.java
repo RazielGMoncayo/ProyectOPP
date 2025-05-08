@@ -8,7 +8,7 @@ public abstract class Pet {
     private double weight;
 
     public Pet(String name, int age, String breed, double weight) {
-        this.name = name;
+        setName(name);
         this.age = age;
         this.breed = breed;
         this.weight = weight;
@@ -19,6 +19,10 @@ public abstract class Pet {
     }
 
     public void setName(String name) {
+        if (name == null || name.trim().isEmpty()){
+            throw new IllegalArgumentException("You must add your pet's name");
+        }
+
         this.name = name;
     }
 
