@@ -14,7 +14,21 @@ public class OwnerMenu {
         this.sc = sc;
     }
 
-    public void addnewOwner() {
+    // Owner List
+    public void listOwner(){
+        if (owners.isEmpty()){
+            System.out.println("There was no Owners added");
+        }
+        else {
+            System.out.println("Owner List: ");
+            for (Owner owner : owners){
+                System.out.println(owner.getName() + " " + owner.getEmail() + " " + owner.getPhoneNumber());
+            }
+        }
+    }
+
+    // Add a new Owner
+    public void addNewOwner() {
         System.out.println("Enter owner's name:");
         String name = sc.nextLine();
 
@@ -28,5 +42,31 @@ public class OwnerMenu {
         owners.add(newOwner);
         System.out.println("Owner added successfully!!");
     }
+
+    // Look for Owner
+    public Owner lookforOwner(){
+        System.out.println("Enter email:");
+        String email = sc.nextLine();
+
+        for (Owner owner : owners){
+            if (owner.getEmail().equalsIgnoreCase(email)){
+                return owner;
+            }
+        }
+        return null;
+    }
+
+    // Delete Owner
+    public void deleteOwnerByEmail(){
+        Owner ownerToDelete = lookforOwner();
+        if (ownerToDelete != null){
+            owners.remove(ownerToDelete);
+            System.out.println("Owner deleted successfully!");
+        } else {
+            System.out.println("Owner not found. Cannot delete");
+        }
+    }
+
+    // Update Owner
 
 }
