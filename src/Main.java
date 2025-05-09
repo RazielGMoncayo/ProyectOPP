@@ -1,5 +1,6 @@
 import com.proyect.opp.information.Owner;
 import com.proyect.opp.menu.OwnerMenu;
+import com.proyect.opp.menu.PetMenu;
 import jdk.jshell.Snippet;
 
 import java.util.InputMismatchException;
@@ -11,6 +12,7 @@ public class Main {
 
 
         OwnerMenu ownerMenu = new OwnerMenu(sc);
+        PetMenu petMenu = new PetMenu(sc);
 
         System.out.println("--------------------------------------");
         System.out.println("- Welcome to the veterinary hospital -");
@@ -39,7 +41,9 @@ public class Main {
                             ownerMenu.listOwner();
                             break;
                         case 2:
-                            ownerMenu.addNewOwner();
+                            Owner newOwner = ownerMenu.addNewOwner();
+                            System.out.println("Now adding a pet to " + newOwner.getName());
+                            petMenu.addPet(newOwner);
                             break;
                         case 3:
                             Owner foundOwner = ownerMenu.lookforOwner();
@@ -60,7 +64,7 @@ public class Main {
                         default:
                             System.out.println("Invalid option");
                     }
-                } while (menu != 3);
+                } while (menu != 5);
             } catch (InputMismatchException e){
                 System.out.println("Error: You must enter a number");
                 sc.next();

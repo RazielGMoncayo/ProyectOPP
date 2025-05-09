@@ -28,19 +28,26 @@ public class OwnerMenu {
     }
 
     // Add a new Owner
-    public void addNewOwner() {
+    public Owner addNewOwner() {
         System.out.println("Enter owner's name:");
         String name = sc.nextLine();
 
-        System.out.println("Enter email:");
+        System.out.println("Enter owner's email:");
         String email = sc.nextLine();
 
-        System.out.println("Enter phone:");
-        String phone = sc.nextLine();
+        System.out.println("Enter owner's phone number:");
+        String phoneNumber = sc.nextLine();
 
-        Owner newOwner = new Owner(name,email,phone);
-        owners.add(newOwner);
-        System.out.println("Owner added successfully!!");
+        Owner newOwner = new Owner(name, email, phoneNumber);
+        boolean added = owners.add(newOwner);
+
+        if (added) {
+            System.out.println("Owner added successfully!");
+        } else {
+            System.out.println("Owner already exists.");
+        }
+
+        return newOwner;
     }
 
     // Look for Owner
@@ -48,6 +55,16 @@ public class OwnerMenu {
         System.out.println("Enter email:");
         String email = sc.nextLine();
 
+        for (Owner owner : owners){
+            if (owner.getEmail().equalsIgnoreCase(email)){
+                return owner;
+            }
+        }
+        return null;
+    }
+
+    // Look for Owner with email
+    public Owner lookforOwner(String email){
         for (Owner owner : owners){
             if (owner.getEmail().equalsIgnoreCase(email)){
                 return owner;
